@@ -1,5 +1,5 @@
 # TMM_Newfeatures
-1.0
+
 #效果
 
 ![img](https://github.com/MethodName/TMM_Newfeatures/blob/master/2016-05-19%2011_43_22.gif)
