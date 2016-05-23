@@ -10,11 +10,11 @@
 ```objc
 
   TMM_NewfeaturesController *welcomeVC = [[TMM_NewfeaturesController alloc]init];
-        [welcomeVC.view setFrame:self.window.bounds];
-        [welcomeVC setImageNames:@[@"1",@"2",@"3"]];//设置图片数组
-        [welcomeVC setCompleteDelegate:self];//设置代理
-        //设置新特性页面为rootVC
-        [self.window setRootViewController:welcomeVC];
+  [welcomeVC.view setFrame:self.window.bounds];
+  [welcomeVC setImageNames:@[@"1",@"2",@"3"]];//设置图片数组
+  [welcomeVC setCompleteDelegate:self];//设置代理
+  //设置新特性页面为rootVC
+  [self.window setRootViewController:welcomeVC];
 
 ```
 
