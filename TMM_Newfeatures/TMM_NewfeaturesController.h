@@ -1,5 +1,5 @@
 //
-//  WelcomeViewController.h
+//  TMM_NewfeaturesController.h
 //
 //  欢迎页面
 //  Created by Methodname  on 14-12-8.
