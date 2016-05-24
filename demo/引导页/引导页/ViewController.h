@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIViewController+Swizzling.h"
 
 @interface ViewController : UIViewController
 

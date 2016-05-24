@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		99AF3F381CEECFBB002EEE05 /* UIViewController+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 99AF3F371CEECFBB002EEE05 /* UIViewController+Swizzling.m */; };
 		99D9672E1CED5F40007D50AB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D9672D1CED5F40007D50AB /* main.m */; };
 		99D967311CED5F40007D50AB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D967301CED5F40007D50AB /* AppDelegate.m */; };
 		99D967341CED5F40007D50AB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D967331CED5F40007D50AB /* ViewController.m */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		99AF3F361CEECFBB002EEE05 /* UIViewController+Swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Swizzling.h"; path = "../UIViewController+Swizzling.h"; sourceTree = "<group>"; };
+		99AF3F371CEECFBB002EEE05 /* UIViewController+Swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Swizzling.m"; path = "../UIViewController+Swizzling.m"; sourceTree = "<group>"; };
 		99D967291CED5F40007D50AB /* 引导页.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "引导页.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		99D9672D1CED5F40007D50AB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		99D9672F1CED5F40007D50AB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -61,6 +64,8 @@
 		99D9672B1CED5F40007D50AB /* 引导页 */ = {
 			isa = PBXGroup;
 			children = (
+				99AF3F361CEECFBB002EEE05 /* UIViewController+Swizzling.h */,
+				99AF3F371CEECFBB002EEE05 /* UIViewController+Swizzling.m */,
 				99D967451CED608D007D50AB /* TMM_Newfeatures */,
 				99D9672F1CED5F40007D50AB /* AppDelegate.h */,
 				99D967301CED5F40007D50AB /* AppDelegate.m */,
@@ -165,6 +170,7 @@
 				99D967341CED5F40007D50AB /* ViewController.m in Sources */,
 				99D967311CED5F40007D50AB /* AppDelegate.m in Sources */,
 				99D9672E1CED5F40007D50AB /* main.m in Sources */,
+				99AF3F381CEECFBB002EEE05 /* UIViewController+Swizzling.m in Sources */,
 				99D967481CED608D007D50AB /* TMM_NewfeaturesController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

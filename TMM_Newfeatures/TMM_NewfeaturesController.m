@@ -100,7 +100,6 @@
     self.completeBtn = btn;
     
     btn.layer.cornerRadius = 5;
-    [btn setTitle:@"开启投资之旅" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
     [btn setHidden:YES];
     [sv addSubview:btn];
