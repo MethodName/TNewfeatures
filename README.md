@@ -9,7 +9,7 @@
 #使用
 ```objc
 
-    TMM_NewfeaturesController *welcomeVC  = [TMM_NewfeaturesController createTMM_NewfeaturesController:@[@"1",@"2",@"3"] CompleteTitle:@"立即体验"
+    TMM_NewfeaturesController *welcomeVC  = [TMM_NewfeaturesController createWithImageNames:@[@"1",@"2",@"3"] CompleteTitle:@"立即体验"
       CompleteDelegate:self
             Frame:self.window.bounds];
   //设置新特性页面为rootVC
