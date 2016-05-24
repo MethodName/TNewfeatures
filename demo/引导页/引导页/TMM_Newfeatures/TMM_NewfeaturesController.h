@@ -21,6 +21,46 @@
 @interface TMM_NewfeaturesController : UIViewController<UIScrollViewDelegate>
 
 /**
+ *  创建一个实例
+ *
+ *  @param imageNames 图片名字数组
+ *  @param title      完成按钮标题
+ *
+ *  @return 实例对象
+ */
++(TMM_NewfeaturesController *)createTMM_NewfeaturesController:(NSArray *)imageNames
+                                                completeTitle:(NSString *)title;
+
+/**
+ *  创建一个实例
+ *
+ *  @param imageNames 图片名字数组
+ *  @param title      完成按钮标题
+ *  @param delegate   完成代理对象
+ *
+ *  @return 实例对象
+ */
++(TMM_NewfeaturesController *)createTMM_NewfeaturesController:(NSArray *)imageNames
+                                                CompleteTitle:(NSString *)title
+                                             CompleteDelegate:(id<WelcomeDelegate>)delegate;
+
+/**
+ *  创建一个实例
+ *
+ *  @param imageNames 图片名字数组
+ *  @param title      完成按钮标题
+ *  @param delegate   完成代理对象
+ *  @param frame      视图范围
+ *
+ *  @return 实例对象
+ */
++(TMM_NewfeaturesController *)createTMM_NewfeaturesController:(NSArray *)imageNames
+                                                CompleteTitle:(NSString *)title
+                                             CompleteDelegate:(id<WelcomeDelegate>)delegate Frame:(CGRect)frame;
+
+
+
+/**
  *  代理
  */
 @property(nonatomic,weak)id<WelcomeDelegate>completeDelegate;

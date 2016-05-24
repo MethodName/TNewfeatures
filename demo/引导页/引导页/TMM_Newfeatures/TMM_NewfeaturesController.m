@@ -40,6 +40,67 @@
 
 
 /**
+ *  创建一个实例
+ *
+ *  @param imageNames 图片名字数组
+ *  @param title      完成按钮标题
+ *
+ *  @return 实例对象
+ */
++(TMM_NewfeaturesController *)createTMM_NewfeaturesController:(NSArray *)imageNames
+                                                completeTitle:(NSString *)title
+{
+    TMM_NewfeaturesController * vc = [[TMM_NewfeaturesController alloc]init];
+    [vc setImageNames:imageNames];
+    [vc.completeBtn setTitle:title forState:UIControlStateNormal];
+    return vc;
+}
+
+/**
+ *  创建一个实例
+ *
+ *  @param imageNames 图片名字数组
+ *  @param title      完成按钮标题
+ *  @param delegate   完成代理对象
+ *
+ *  @return 实例对象
+ */
++(TMM_NewfeaturesController *)createTMM_NewfeaturesController:(NSArray *)imageNames
+                                                CompleteTitle:(NSString *)title
+                                             CompleteDelegate:(id<WelcomeDelegate>)delegate
+{
+    TMM_NewfeaturesController * vc = [[TMM_NewfeaturesController alloc]init];
+    [vc setImageNames:imageNames];
+    [vc.completeBtn setTitle:title forState:UIControlStateNormal];
+    [vc setCompleteDelegate:delegate];
+    return vc;
+}
+
+/**
+ *  创建一个实例
+ *
+ *  @param imageNames 图片名字数组
+ *  @param title      完成按钮标题
+ *  @param delegate   完成代理对象
+ *  @param frame      视图范围
+ *
+ *  @return 实例对象
+ */
++(TMM_NewfeaturesController *)createTMM_NewfeaturesController:(NSArray *)imageNames
+                                                CompleteTitle:(NSString *)title
+                                             CompleteDelegate:(id<WelcomeDelegate>)delegate Frame:(CGRect)frame
+{
+    TMM_NewfeaturesController * vc = [[TMM_NewfeaturesController alloc]init];
+    [vc setImageNames:imageNames];
+    [vc.completeBtn setTitle:title forState:UIControlStateNormal];
+    [vc.view setFrame:frame];
+    [vc setCompleteDelegate:delegate];
+    return vc;
+}
+
+
+
+/**
  *  设置图片数组
  *
  *  @param imageNames 图片数组
