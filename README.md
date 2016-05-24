@@ -9,10 +9,9 @@
 #使用
 ```objc
 
-  TMM_NewfeaturesController *welcomeVC = [[TMM_NewfeaturesController alloc]init];
-  [welcomeVC.view setFrame:self.window.bounds];
-  [welcomeVC setImageNames:@[@"1",@"2",@"3"]];//设置图片数组
-  [welcomeVC setCompleteDelegate:self];//设置代理
+    TMM_NewfeaturesController *welcomeVC  = [TMM_NewfeaturesController createTMM_NewfeaturesController:@[@"1",@"2",@"3"] CompleteTitle:@"立即体验"
+      CompleteDelegate:self
+            Frame:self.window.bounds];
   //设置新特性页面为rootVC
   [self.window setRootViewController:welcomeVC];
 
