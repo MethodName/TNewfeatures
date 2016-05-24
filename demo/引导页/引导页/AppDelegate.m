@@ -31,7 +31,7 @@
     if (1==1)
     {
         
-        TMM_NewfeaturesController *welcomeVC  = [TMM_NewfeaturesController createTMM_NewfeaturesController:@[@"1",@"2",@"3"] CompleteTitle:@"立即体验"
+        TMM_NewfeaturesController *welcomeVC  = [TMM_NewfeaturesController createWithImageNames:@[@"1",@"2",@"3"] CompleteTitle:@"立即体验"
       CompleteDelegate:self
             Frame:self.window.bounds];
         

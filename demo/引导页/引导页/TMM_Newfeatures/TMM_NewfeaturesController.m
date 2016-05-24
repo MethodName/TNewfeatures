@@ -47,7 +47,7 @@
  *
  *  @return 实例对象
  */
-+(TMM_NewfeaturesController *)createTMM_NewfeaturesController:(NSArray *)imageNames
++(TMM_NewfeaturesController *)createWithImageNames:(NSArray *)imageNames
                                                 completeTitle:(NSString *)title
 {
     TMM_NewfeaturesController * vc = [[TMM_NewfeaturesController alloc]init];
@@ -65,7 +65,7 @@
  *
  *  @return 实例对象
  */
-+(TMM_NewfeaturesController *)createTMM_NewfeaturesController:(NSArray *)imageNames
++(TMM_NewfeaturesController *)createWithImageNames:(NSArray *)imageNames
                                                 CompleteTitle:(NSString *)title
                                              CompleteDelegate:(id<WelcomeDelegate>)delegate
 {
@@ -86,7 +86,7 @@
  *
  *  @return 实例对象
  */
-+(TMM_NewfeaturesController *)createTMM_NewfeaturesController:(NSArray *)imageNames
++(TMM_NewfeaturesController *)createWithImageNames:(NSArray *)imageNames
                                                 CompleteTitle:(NSString *)title
                                              CompleteDelegate:(id<WelcomeDelegate>)delegate Frame:(CGRect)frame
 {
