@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "TMM_NewfeaturesController.h"
 
-@interface AppDelegate ()<WelcomeDelegate>
+@interface AppDelegate ()
 
 /**
  *  默认根视图
@@ -25,43 +25,22 @@
 {
     //保存原本的rootVC
     self.defaultRootVC = self.window.rootViewController;
-    /**
-     *  判断是否第一次进入程序
-     */
-    if (1==1)
-    {
-        
-        TMM_NewfeaturesController *welcomeVC  = [TMM_NewfeaturesController createWithImageNames:@[@"1",@"2",@"3"] CompleteTitle:@"立即体验"
-      CompleteDelegate:self
-            Frame:self.window.bounds];
-        
-        //设置新特性页面为rootVC
-        [self.window setRootViewController:welcomeVC];
-    }
+    
+    __weak AppDelegate *temp = self;
+    TMM_NewfeaturesController *welcomeVC  = [TMM_NewfeaturesController
+                                             createWithImageNames:@[@"1",@"2",@"3"]
+                                                    CompleteTitle:@"立即体验"
+                                                            Frame:self.window.bounds
+                                                         Complete:^{
+                                                           //切换回主页面
+                                                           [temp.window setRootViewController:temp.defaultRootVC];
+                                                          }];
+    //设置新特性页面为rootVC
+    [self.window setRootViewController:welcomeVC];
+    
     
     return YES;
 }
-
-/**
- *  欢迎页完成
- */
--(void)welcomeOK
-{
-    //切回原来的rootVC
-    [self.window setRootViewController:self.defaultRootVC];
-}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

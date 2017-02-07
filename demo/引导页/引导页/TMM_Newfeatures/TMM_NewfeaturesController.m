@@ -7,9 +7,7 @@
 //
 
 #import "TMM_NewfeaturesController.h"
-#import "AppDelegate.h"
 
-#pragma mark -欢迎界面
 @interface TMM_NewfeaturesController ()
 
 /**
@@ -22,19 +20,14 @@
  */
 @property(nonatomic,strong)NSMutableArray *imageArray;
 
+/**
+ 完成按钮回调block
+ */
+@property(nonatomic,copy)CompleteClick completeBtnclick;
 
 @end
 
-//获取屏幕 宽度、高度
-#define DV_W ([UIScreen mainScreen].bounds.size.width)
-#define DV_H ([UIScreen mainScreen].bounds.size.height)
 
-//延迟GCD时间
-#define DisTime(time)  dispatch_time(DISPATCH_TIME_NOW, time * NSEC_PER_SEC)
-//延迟GCD
-#define DisBACK(disTime,block) dispatch_after(disTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){dispatch_async(dispatch_get_main_queue(), block);});
-
-#define kNotificationWelcomeOk @"_kNotificationWelcomeOk"
 
 @implementation TMM_NewfeaturesController
 
@@ -67,12 +60,12 @@
  */
 +(TMM_NewfeaturesController *)createWithImageNames:(NSArray *)imageNames
                                                 CompleteTitle:(NSString *)title
-                                             CompleteDelegate:(id<WelcomeDelegate>)delegate
+                                             Complete:(CompleteClick)complete
 {
     TMM_NewfeaturesController * vc = [[TMM_NewfeaturesController alloc]init];
     [vc setImageNames:imageNames];
     [vc.completeBtn setTitle:title forState:UIControlStateNormal];
-    [vc setCompleteDelegate:delegate];
+    vc.completeBtnclick = complete;
     return vc;
 }
 
@@ -88,13 +81,14 @@
  */
 +(TMM_NewfeaturesController *)createWithImageNames:(NSArray *)imageNames
                                                 CompleteTitle:(NSString *)title
-                                             CompleteDelegate:(id<WelcomeDelegate>)delegate Frame:(CGRect)frame
+                                                        Frame:(CGRect)frame
+                                                     Complete:(CompleteClick)complete
 {
     TMM_NewfeaturesController * vc = [[TMM_NewfeaturesController alloc]init];
     [vc setImageNames:imageNames];
     [vc.completeBtn setTitle:title forState:UIControlStateNormal];
     [vc.view setFrame:frame];
-    [vc setCompleteDelegate:delegate];
+    vc.completeBtnclick = complete;
     return vc;
 }
 
@@ -151,22 +145,21 @@
         [self.imageArray addObject:imgView];
         lastImg = imgView;
     }
+    
+    //complete按钮
     UIButton * btn = [UIButton buttonWithType:UIButtonTypeSystem];
     btn.frame = CGRectMake(lastImg.frame.origin.x, 0, viewFrame.size.width-32, 44);
-     btn.center = CGPointMake(lastImg.frame.origin.x+viewFrame.size.width/2, viewFrame.size.height - btn.frame.size.height/2-30);
-    [btn setTitleColor:[UIColor blackColor] forState:0];
-    btn.backgroundColor = [UIColor orangeColor];
-    [btn setTitleColor:[UIColor whiteColor] forState:0];
+    btn.center = CGPointMake(lastImg.frame.origin.x+viewFrame.size.width/2, viewFrame.size.height - btn.frame.size.height/2-30);
+    btn.backgroundColor = CompleteBtnBackgroundColorr;
+    [btn setTitleColor:CompleteBtnTitleColor forState:0];
     
-    self.completeBtn = btn;
-    
-    btn.layer.cornerRadius = 5;
-    [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
-    [btn setHidden:YES];
+    btn.layer.cornerRadius = CompleteBtnCornerRadius;
+    [btn addTarget:self action:@selector(completeBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [sv addSubview:btn];
-    
+    self.completeBtn = btn;
  
     
+    //page
     UIPageControl *page = [[UIPageControl alloc] init];
     page.frame = CGRectMake(0,
                             self.view.bounds.size.height-self.bottomLayoutGuide.length-30,
@@ -176,14 +169,14 @@
     page.numberOfPages =self.imageNames.count;
     page.userInteractionEnabled = NO;
     
-    page.currentPageIndicatorTintColor = [UIColor orangeColor];
-    
-    page.pageIndicatorTintColor = [UIColor colorWithRed:(200.0/255.0f) green:(200.0/255.0f) blue:(200.0/255.0f) alpha:0.5f];
-
-    self.pageControl = page;
+    page.currentPageIndicatorTintColor = CurrentPageIndicatorTintColor;
+    page.pageIndicatorTintColor = PageIndicatorTintColor;
     [self.view addSubview:sv];
-    
     [self.view addSubview:page];
+    
+    
+    self.pageControl = page;
+    
  }
 
 /**
@@ -196,7 +189,8 @@
     
     //偏移图片处理
     NSInteger index =scrollView.contentOffset.x/self.view.frame.size.width;
-    if (index<2) {
+    if (index<2)
+    {
         UIImageView *image1 = self.imageArray[index];
         UIImageView *image2 = self.imageArray[index+1];
         [image1 setFrame:CGRectMake(scrollView.contentOffset.x, 0, DV_W-(scrollView.contentOffset.x-DV_W*index), DV_H)];
@@ -205,13 +199,20 @@
     }
     
     //显示按钮
-    __weak TMM_NewfeaturesController *temp = self;
     self.pageControl.currentPage =  index;
-    DisBACK(DisTime(0.5),^{
-        [temp.completeBtn setHidden:!(temp.pageControl.numberOfPages-1 == index)];
-    });
-    //隐藏Page
-    [self.pageControl setHidden:(self.pageControl.numberOfPages-1 == index)];
+    //当前下标为最后一页
+    if (self.pageControl.numberOfPages-1 == index)
+    {
+        //显示按钮
+        [UIView animateWithDuration:AnimateDuration delay:AnimateDelay options:UIViewAnimationOptionLayoutSubviews animations:^{
+            [self.completeBtn setAlpha:1.0f];
+        } completion:nil];
+    }
+    else
+    {
+        //隐藏按钮
+        [self.completeBtn setAlpha:0.0];
+    }
 }
 
 
@@ -219,14 +220,13 @@
 /**
  *  完成按钮点击
  */
--(void) btnClick
+-(void)completeBtnClick
 {
-    
-//    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-//    [center postNotificationName:kNotificationWelcomeOk object:nil];
-    
-    [self.completeDelegate welcomeOK];
-    
+    //执行外部传入的block
+    if (self.completeBtnclick)
+    {
+        self.completeBtnclick();
+    }
 }
 
 
