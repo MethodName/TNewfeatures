@@ -6,28 +6,25 @@
 
 
 
-#使用
+#【2.0版本】使用更加简洁
 ```objc
 
-    TMM_NewfeaturesController *welcomeVC  = [TMM_NewfeaturesController createWithImageNames:@[@"1",@"2",@"3"] CompleteTitle:@"立即体验"
-      CompleteDelegate:self
-            Frame:self.window.bounds];
-  //设置新特性页面为rootVC
-  [self.window setRootViewController:welcomeVC];
+    //保存原本的rootVC
+    self.defaultRootVC = self.window.rootViewController;
+    
+    __weak AppDelegate *temp = self;
+    TMM_NewfeaturesController *welcomeVC  = [TMM_NewfeaturesController
+                                             createWithImageNames:@[@"1",@"2",@"3"]
+                                                    CompleteTitle:@"立即体验"
+                                                            Frame:self.window.bounds
+                                                         Complete:^{
+                                                           //切换回主页面
+                                                           [temp.window setRootViewController:temp.defaultRootVC];
+                                                          }];
+    //设置新特性页面为rootVC
+    [self.window setRootViewController:welcomeVC];
+    
 
-```
-
-#设置代理
-```objc
-
- [welcomeVC setCompleteDelegate:self];//设置代理
- 
- -(void)welcomeOK
-{
-    //切回原来的rootVC
-}
-
- 
 ```
 
 #备注
