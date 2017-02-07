@@ -189,7 +189,7 @@
     
     //偏移图片处理
     NSInteger index =scrollView.contentOffset.x/self.view.frame.size.width;
-    if (index<2)
+    if (index<self.imageArray.count-1)
     {
         UIImageView *image1 = self.imageArray[index];
         UIImageView *image2 = self.imageArray[index+1];
