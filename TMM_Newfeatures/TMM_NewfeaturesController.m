@@ -216,6 +216,17 @@
 }
 
 
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    NSInteger index = scrollView.contentOffset.x/self.view.frame.size.width;
+    if (index == self.imageArray.count-1)
+    {
+        UIImageView *image2 = self.imageArray.lastObject;
+        [image2 setFrame:CGRectMake(scrollView.contentSize.width-self.view.frame.size.width, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    }
+}
+
+
 
 /**
  *  完成按钮点击
